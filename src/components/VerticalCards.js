@@ -2,15 +2,13 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import CustomText from './CustomText';
 import { colors } from '../constants/theme';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const HorizontalCard = ({ image, title, distance }) => (
+const VerticalCard = ({ image, title, distance }) => (
   <View style={styles.card}>
     <Image source={image} style={styles.image} />
-
-    {/* Dark Overlay */}
     <View style={styles.overlay} />
 
-    {/* Text on top of overlay */}
     <View style={styles.textContainer}>
       <CustomText medium style={styles.title}>{title}</CustomText>
       <CustomText style={styles.distance}>{distance}</CustomText>
@@ -20,17 +18,17 @@ const HorizontalCard = ({ image, title, distance }) => (
 
 const styles = StyleSheet.create({
   card: {
-    width: 180, // Less width
-    height: 250, // More height
-    marginRight: 16,
+    width: wp('45%'),
+    height: hp('30%'),
+    marginRight: wp('4%'),
     position: 'relative',
-    borderRadius: 16,
-    overflow: 'hidden', // Prevent content overflow
+    borderRadius: wp('4%'),
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
     height: '100%',
-    borderRadius: 16,
+    borderRadius: wp('4%'),
   },
   overlay: {
     position: 'absolute',
@@ -38,24 +36,24 @@ const styles = StyleSheet.create({
     left: 0,
     height: '100%',
     width: '100%',
-    backgroundColor:colors.bgcolor,
-    borderRadius: 16,
+    backgroundColor: colors.bgcolor,
+    borderRadius: wp('4%'),
   },
   textContainer: {
     position: 'absolute',
-    bottom: 10,
-    left: 10,
-    right: 10,
+    bottom: hp('1.5%'),
+    left: wp('3%'),
+    right: wp('3%'),
   },
   title: {
     color: colors.textLight,
-    fontSize: 16,
-    marginBottom: 2,
+    fontSize: wp('3.5%'),
+    marginBottom: hp('0.5%'),
   },
   distance: {
-    color:colors.distance,
-    fontSize: 13,
+    color: colors.distance,
+    fontSize: wp('3%'),
   },
 });
 
-export default HorizontalCard;
+export default VerticalCard;

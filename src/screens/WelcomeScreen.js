@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import CustomButton from '../components/CustomButton';
 import CustomText from '../components/CustomText';
 import { colors } from '../constants/theme';
-
-const { width } = Dimensions.get('window');
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const WelcomeScreen = ({ navigation }) => {
   return (
@@ -44,35 +46,36 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 30,
+    paddingLeft: wp('8%'),
+    paddingRight: wp('8%'),
   },
   image: {
-    width: width * 0.8,
-    height: 300,
-    marginBottom: 30,
+    width: wp('90%'),
+    height: hp('38%'),
+    marginBottom: hp('3.5%'),
+
   },
   textBase: {
-    fontSize: 16,
-    lineHeight: 30,
+    fontSize: wp('3.5%'),
+    lineHeight: hp('3.8%'),
     color: colors.textLight,
     textAlign: 'center',
   },
   title: {
-    fontSize: 22,
-    marginBottom: 10,
+    fontSize: wp('5.2%'),
+    marginBottom: hp('2%'),
   },
   subtitle: {
     color: colors.textGray,
-    marginBottom: 40,
-    lineHeight: 24,
+    marginBottom: wp('4.5%'),
+    lineHeight: hp('3%'),
   },
   buttonGroup: {
     width: '100%',
-    gap: 16, // If not supported, fallback below
-    // Alternative for older RN versions:
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    gap: hp('2.2%'),
+     paddingLeft: wp('3%'),
+    paddingRight: wp('3%'),
+    
   },
 });
 

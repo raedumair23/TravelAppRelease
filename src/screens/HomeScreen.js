@@ -8,13 +8,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import images from '../assets/images/index';
 import CustomText from '../components/CustomText';
 import HorizontalCard from '../components/VerticalCards';
 import VerticalCard from '../components/HorizontalCards';
 import { colors } from '../constants/theme';
 import { useNavigation } from '@react-navigation/native';
-import experiences from '../data/experiences'; // 🔹 Imported experience data
+import experiences from '../data/experiences';
 
 const categories = ['All', 'Forest', 'Mountains', 'Beach', 'City', 'Diving'];
 
@@ -22,7 +23,6 @@ const HomeScreen = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const navigation = useNavigation();
 
-  // 🔹 Filter experiences based on selected category
   const filteredExperiences =
     activeCategory === 'All'
       ? experiences
@@ -30,7 +30,6 @@ const HomeScreen = () => {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
-      {/* Header */}
       <View style={styles.header}>
         <View>
           <CustomText style={styles.helloText} regular>Hello, Hazar</CustomText>
@@ -42,17 +41,15 @@ const HomeScreen = () => {
         />
       </View>
 
-      {/* Search */}
       <View style={styles.searchContainer}>
         <TextInput
           placeholder="Temukan Liburan Anda"
           placeholderTextColor="#A3A3A3"
           style={styles.searchInput}
         />
-        <Ionicons name="search" size={20} color="#A3A3A3" />
+        <Ionicons name="search" size={wp('4.5%')} color="#A3A3A3" />
       </View>
 
-      {/* Categories */}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryScroll}>
         {categories.map(cat => (
           <TouchableOpacity
@@ -77,7 +74,6 @@ const HomeScreen = () => {
         ))}
       </ScrollView>
 
-      {/* Popular Experiences */}
       <CustomText style={styles.sectionTitle} medium>Popular Experiences</CustomText>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cardScroll}>
         {filteredExperiences.map(exp => (
@@ -90,7 +86,6 @@ const HomeScreen = () => {
         ))}
       </ScrollView>
 
-      {/* Featured Section */}
       <CustomText style={styles.sectionTitle} medium>Featured</CustomText>
 
       <TouchableOpacity
@@ -134,72 +129,74 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#0A1F29',
-    paddingHorizontal: 20,
+    paddingHorizontal: wp('5%'),
   },
   scrollContent: {
-    paddingBottom: 100,
+    paddingBottom: hp('10%'),
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: hp('6%'),
   },
   helloText: {
     color: '#A3A3A3',
-    fontSize: 16,
+    fontSize: wp('3.8%'),
   },
   title: {
     color: '#fff',
-    fontSize: 28,
+    fontSize: wp('5%'),
   },
   profilePic: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: wp('15%'),
+    height: wp('15%'),
+    borderRadius: wp('15%'),
   },
   searchContainer: {
     backgroundColor: '#1C2A34',
-    borderRadius: 12,
+    borderRadius: wp('3%'),
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    marginTop: 20,
+    paddingHorizontal: wp('4%'),
+    paddingVertical: hp('0.5%'),
+    marginTop: hp('3%'),
   },
   searchInput: {
     flex: 1,
     color: '#fff',
-    fontSize: 16,
+    fontSize: wp('3.5%'),
   },
   categoryScroll: {
-    marginTop: 20,
+    marginTop: hp('3%'),
+    
+
   },
   categoryButton: {
     backgroundColor: '#1C2A34',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 12,
-    marginRight: 10,
-  },
+    paddingHorizontal: wp('4%'),
+    paddingVertical: hp('1%'),
+    borderRadius: wp('3%'),
+    marginRight: wp('2%'),
+    },
   categoryButtonActive: {
     backgroundColor: '#5EDFFF',
   },
   categoryText: {
     color: '#fff',
-    fontSize: 14,
+    fontSize: wp('3%'),
   },
   categoryTextActive: {
-    color: '#0A1F29',
+    color: colors.cattext,
   },
   sectionTitle: {
-    color: '#fff',
-    fontSize: 20,
-    marginTop: 30,
-    marginBottom: 10,
+    color: colors.textLight,
+    fontSize: wp('4.5%'),
+    marginTop: hp('4%'),
+    marginBottom: hp('2%'),
   },
   cardScroll: {
-    marginBottom: 10,
+    marginBottom: hp('1%'),
   },
 });
 

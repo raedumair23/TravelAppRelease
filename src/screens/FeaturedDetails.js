@@ -11,7 +11,8 @@ import CustomButton from '../components/CustomButton';
 import CustomText from '../components/CustomText';
 import { colors } from '../constants/theme';
 import fonts from '../assets/fonts/fonts';
-import featureDescriptions from '../data/FeatureDescriptions'; 
+import featureDescriptions from '../data/FeatureDescriptions';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const FeatureDetailsScreen = ({ route, navigation }) => {
   const { image, title, rating } = route.params;
@@ -21,7 +22,7 @@ const FeatureDetailsScreen = ({ route, navigation }) => {
     <View style={styles.infoWrapper}>
       <CustomText bold style={styles.infoValue}>{value}</CustomText>
       <View style={styles.infoBadge}>
-        <Ionicons name={icon} size={22} color="#fff" />
+        <Ionicons name={icon} size={wp('5.5%')} color="#fff" />
       </View>
       <CustomText medium style={styles.infoLabel}>{label}</CustomText>
     </View>
@@ -38,14 +39,12 @@ const FeatureDetailsScreen = ({ route, navigation }) => {
         onBackPress={() => navigation.goBack()}
       />
 
-      {/* Info Badges */}
       <View style={styles.badgeRow}>
         <InfoBadge icon="navigate" label="Difficulty" value={current.difficulty} />
         <InfoBadge icon="time-outline" label="Time Needed" value={current.time} />
         <InfoBadge icon="ticket-outline" label="Ticket" value={current.ticket} />
       </View>
 
-      {/* About Section */}
       <CustomText bold style={styles.sectionTitle}>About</CustomText>
       <CustomText style={styles.aboutText}>
         {current.about}
@@ -55,7 +54,6 @@ const FeatureDetailsScreen = ({ route, navigation }) => {
         </Text>
       </CustomText>
 
-      {/* Action Buttons */}
       <View style={styles.buttonRow}>
         <View style={styles.buttonWrapper}>
           <CustomButton
@@ -64,7 +62,7 @@ const FeatureDetailsScreen = ({ route, navigation }) => {
             icon={
               <Ionicons
                 name="map-outline"
-                size={18}
+                size={wp('4.5%')}
                 color={colors.primary}
                 style={styles.iconStyle}
               />
@@ -90,24 +88,24 @@ const FeatureDetailsScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0A1F29',
-    paddingHorizontal: 20,
+    backgroundColor: colors.background,
+    paddingHorizontal: wp('5%'),
   },
   badgeRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 16,
+    marginTop: hp('2%'),
   },
   sectionTitle: {
-    color: '#fff',
-    fontSize: 20,
-    marginTop: 30,
-    marginBottom: 10,
+    color: colors.textLight,
+    fontSize: wp('4%'),
+    marginTop: hp('3.5%'),
+    marginBottom: hp('1.5%'),
   },
   aboutText: {
-    color: 'rgba(255,255,255,0.85)',
-    fontSize: 14,
-    lineHeight: 22,
+    color: colors.aboutText,
+    fontSize: wp('3%'),
+    lineHeight: hp('2.8%'),
   },
   readMore: {
     color: colors.primary,
@@ -116,64 +114,67 @@ const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 30,
-    marginBottom: 40,
+    marginTop: hp('4%'),
+    marginBottom: hp('6%'),
   },
   buttonWrapper: {
     width: '48%',
+    paddingLeft: wp('1%'),
+    paddingRight: wp('1%'),
   },
   siteMapButton: {
     width: '100%',
     borderWidth: 1,
     borderColor: colors.primary,
-    paddingVertical: 14,
-    borderRadius: 12,
+    paddingVertical: hp('1.5%'),
+    borderRadius: wp('3%'),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   siteMapText: {
     color: colors.primary,
-    fontSize: 16,
+    fontSize: wp('3%'),
     fontFamily: fonts.medium,
   },
   startButton: {
     width: '100%',
     backgroundColor: colors.primary,
-    paddingVertical: 14,
-    borderRadius: 12,
+    paddingVertical: hp('1.5%'),
+    borderRadius: wp('3%'),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+ 
+  
   },
   startText: {
-    color: '#0A1F29',
-    fontSize: 16,
+    color: colors.cattext,
+    fontSize: wp('3%'),
     fontFamily: fonts.medium,
   },
   iconStyle: {
-    marginRight: 8,
+    marginRight: wp('2%'),
   },
 
-  // Info Badge Styling
   infoWrapper: {
     alignItems: 'center',
     width: '30%',
   },
   infoBadge: {
     backgroundColor: '#1C2A34',
-    padding: 14,
-    borderRadius: 16,
-    marginVertical: 6,
+    padding: hp('1.5%'),
+    borderRadius: wp('4%'),
+    marginVertical: hp('1%'),
   },
   infoValue: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: wp('3.5%'),
     textAlign: 'center',
   },
   infoLabel: {
     color: '#ccc',
-    fontSize: 12,
+    fontSize: wp('3%'),
     textAlign: 'center',
   },
 });

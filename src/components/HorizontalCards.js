@@ -2,20 +2,16 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import CustomText from './CustomText';
 import { colors } from '../constants/theme';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const VerticalCard = ({ image, title, distance, rating }) => (
+const HorizontalCard = ({ image, title, distance, rating }) => (
   <View style={styles.card}>
     <Image source={image} style={styles.image} />
 
-    {/* Dark overlay */}
     <View style={styles.overlay} />
-
-    {/* Rating badge on top right */}
     <View style={styles.ratingBadge}>
       <CustomText style={styles.ratingText}>{rating} ⭐</CustomText>
     </View>
-
-    {/* Text over image (bottom-left) */}
     <View style={styles.textContainer}>
       <CustomText medium style={styles.title}>{title}</CustomText>
       <CustomText style={styles.distance}>{distance}</CustomText>
@@ -25,54 +21,52 @@ const VerticalCard = ({ image, title, distance, rating }) => (
 
 const styles = StyleSheet.create({
   card: {
-    marginBottom: 30,
+    marginBottom: hp('3.5%'),
     position: 'relative',
   },
   image: {
-    width: 390,
-    height: 200,
-    borderRadius: 16,
-    resizeMode:'cover',
-    left:-10
+    width: wp('90%'),
+    height: hp('25%'),
+    borderRadius: wp('4%'),
+    resizeMode: 'cover',
+    alignSelf: 'center',
   },
   overlay: {
     position: 'absolute',
     top: 0,
-    left:-10,    
-    height: 200,
-    width: 390,
-    backgroundColor:colors.bgcolor,
-    borderRadius: 16,
+    alignSelf: 'center',
+    height: hp('25%'),
+    width: wp('90%'),
+    backgroundColor: colors.bgcolor,
+    borderRadius: wp('4%'),
   },
   textContainer: {
     position: 'absolute',
-    bottom: 12,
-    left: 16,
-    right: 16,
+    bottom: hp('1.5%'),
+    left: wp('4%'),
+    right: wp('4%'),
   },
   title: {
     color: colors.textLight,
-    fontSize: 20,
-    marginBottom: 4,
+    fontSize: wp('4.3%'),
+    marginBottom: hp('0.5%'),
   },
   distance: {
-    color:colors.distance,
-    fontSize: 13,
+    color: colors.distance,
+    fontSize: wp('3%'),
   },
- ratingBadge: {
-  position: 'absolute',
-  bottom: 12,     // ✅ was `top: 12`, now `bottom: 12`
-  right: 12,
-  paddingHorizontal: 8,
-  paddingVertical: 4,
-  borderRadius: 12,
-},
-
+  ratingBadge: {
+    position: 'absolute',
+    bottom: hp('1.5%'),
+    right: wp('4%'),
+    paddingHorizontal: wp('2%'),
+    paddingVertical: hp('0.8%'),
+    borderRadius: wp('3%'),
+  },
   ratingText: {
     color: colors.textLight,
-    fontSize: 17,
-    fontWeight: 'bold',
+    fontSize: wp('3%'),
   },
 });
 
-export default VerticalCard;
+export default HorizontalCard;

@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   Image,
-  Dimensions,
   KeyboardAvoidingView,
   Platform,
   Alert,
@@ -11,69 +10,39 @@ import {
   Keyboard,
   ScrollView,
 } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import CustomText from '../components/CustomText';
 import CustomTextInput from '../components/CustomTextInput';
 import CustomButton from '../components/CustomButton';
 import { colors } from '../constants/theme';
 
-const { width } = Dimensions.get('window');
-
 const SignupScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const [errors, setErrors] = useState({
-    username: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-  });
+  const [errors, setErrors] = useState({});
 
   const validate = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-    let valid = true;
     const newErrors = {};
 
-    if (!username.trim()) {
-      newErrors.username = 'Username is required';
-      valid = false;
-    }
-
-    if (!email.trim()) {
-      newErrors.email = 'Email is required';
-      valid = false;
-    } else if (!emailRegex.test(email)) {
-      newErrors.email = 'Invalid email format';
-      valid = false;
-    }
-
-   
-
-    if (!password.trim()) {
-      newErrors.password = 'Password is required';
-      valid = false;
-    } else if (!passwordRegex.test(password)) {
-      newErrors.password =
-        'Password must be at least 8 characters and include uppercase, lowercase, number, and special character';
-      valid = false;
-    }
-
-    if (password !== confirmPassword) {
+    if (!username.trim()) newErrors.username = 'Username is required';
+    if (!email.trim()) newErrors.email = 'Email is required';
+    else if (!emailRegex.test(email)) newErrors.email = 'Invalid email format';
+    if (!password.trim()) newErrors.password = 'Password is required';
+    else if (!passwordRegex.test(password))
+      newErrors.password = 'Password must include upper, lower, number & symbol';
+    if (password !== confirmPassword)
       newErrors.confirmPassword = 'Passwords do not match';
-      valid = false;
-    }
 
     setErrors(newErrors);
 
-    if (valid) {
-      Alert.alert('Success', 'Signup successful!');
-      // navigation.navigate('Login');
+    if (Object.keys(newErrors).length === 0) {
+      navigation.navigate('Home');
     }
   };
 
@@ -86,21 +55,14 @@ const SignupScreen = ({ navigation }) => {
         <ScrollView
           contentContainerStyle={styles.scrollContainer}
           keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
         >
           <Image
             source={require('../assets/images/image.png')}
             style={styles.image}
             resizeMode="contain"
           />
-
-          <CustomText bold style={[styles.textBase, styles.title]}>
-            Create Account
-          </CustomText>
-
-          <CustomText style={[styles.textBase, styles.subtitle]}>
-            Please fill the form to sign up
-          </CustomText>
+          <CustomText bold style={styles.title}>Create Account</CustomText>
+          <CustomText style={styles.subtitle}>Please fill the form to sign up</CustomText>
 
           <CustomTextInput
             placeholder="Username"
@@ -111,11 +73,11 @@ const SignupScreen = ({ navigation }) => {
             }}
             error={!!errors.username}
             errorMessage={errors.username}
+            iconName="person-outline"
           />
 
           <CustomTextInput
             placeholder="Email"
-            keyboardType="email-address"
             value={email}
             onChangeText={(text) => {
               setEmail(text);
@@ -123,11 +85,12 @@ const SignupScreen = ({ navigation }) => {
             }}
             error={!!errors.email}
             errorMessage={errors.email}
+            iconName="mail-outline"
+            keyboardType="email-address"
           />
 
           <CustomTextInput
             placeholder="Password"
-            secureTextEntry
             value={password}
             onChangeText={(text) => {
               setPassword(text);
@@ -135,11 +98,12 @@ const SignupScreen = ({ navigation }) => {
             }}
             error={!!errors.password}
             errorMessage={errors.password}
+            secureTextEntry
+            iconName="lock-closed-outline"
           />
 
           <CustomTextInput
             placeholder="Confirm Password"
-            secureTextEntry
             value={confirmPassword}
             onChangeText={(text) => {
               setConfirmPassword(text);
@@ -147,15 +111,19 @@ const SignupScreen = ({ navigation }) => {
             }}
             error={!!errors.confirmPassword}
             errorMessage={errors.confirmPassword}
+            secureTextEntry
+            iconName="lock-closed-outline"
           />
 
-          <CustomButton title="Sign Up" onPress={validate} />
+          <View style={styles.buttonWrapper}>
+            <CustomButton title="Sign Up" onPress={validate} />
+          </View>
 
-          <CustomText style={[styles.textBase, styles.footerText]}>
+          <CustomText style={styles.footerText}>
             Already have an account?{' '}
             <CustomText
               bold
-              style={[styles.textBase, styles.footerLink]}
+              style={styles.footerLink}
               onPress={() => navigation.navigate('Login')}
             >
               Login
@@ -168,45 +136,45 @@ const SignupScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
+  container: { flex: 1, backgroundColor: colors.background },
   scrollContainer: {
     flexGrow: 1,
-    paddingHorizontal: 30,
+    paddingHorizontal: wp('7%'),
     justifyContent: 'center',
-    paddingTop: 40,
-    paddingBottom: 40,
+    paddingTop: hp('5%'),
+    paddingBottom: hp('5%'),
   },
   image: {
-    width: width * 0.5,
-    height: 150,
+    width: wp('50%'),
+    height: hp('20%'),
     alignSelf: 'center',
-    marginBottom: 20,
-  },
-  textBase: {
-    fontSize: 16,
-    lineHeight: 30,
-    color: colors.textLight,
-    textAlign: 'center',
+    marginBottom: hp('3%'),
   },
   title: {
-    fontSize: 22,
-    marginBottom: 6,
+    fontSize: wp('5.5%'),
+    color: colors.textLight,
+    textAlign: 'center',
+    marginBottom: hp('1.5%'),
   },
   subtitle: {
+    fontSize: wp('3.8%'),
     color: colors.textGray,
-    marginBottom: 30,
+    textAlign: 'center',
+    marginBottom: hp('3.5%'),
+  },
+  buttonWrapper: {
+    paddingHorizontal: wp('2%'),
+    marginTop: hp('1.5%'),
   },
   footerText: {
-    fontSize: 14,
+    fontSize: wp('3.2%'),
     color: colors.textGray,
-    marginTop: 24,
-    lineHeight: 22,
+    textAlign: 'center',
+    marginTop: hp('3%'),
   },
   footerLink: {
     color: colors.primary,
+    fontSize: wp('3.2%'),
   },
 });
 

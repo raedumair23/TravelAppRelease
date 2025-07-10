@@ -42,9 +42,8 @@ top:-12
     resizeMode:'stretch'
     
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.25)',
+  overlay: { 
+    backgroundColor:colors.bgcolor,
     borderTopLeftRadius:30,
     borderTopRightRadius:30,
     borderBottomLeftRadius:50,
@@ -74,11 +73,11 @@ top:-12
     alignItems: 'center',
   },
   title: {
-    color: '#fff',
+    color:colors.textLight,
     fontSize: 22,
   },
   rating: {
-    color: '#FFD700',
+    color:colors.rating,
     fontSize: 14,
   },
 });

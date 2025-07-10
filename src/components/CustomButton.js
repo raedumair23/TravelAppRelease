@@ -4,7 +4,10 @@ import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import CustomText from './CustomText';
 import fonts from '../assets/fonts/fonts';
 import { colors } from '../constants/theme';
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 const CustomButton = ({
   title,
   onPress,
@@ -45,6 +48,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     width: '100%',
     borderRadius: 12,
+    
   },
   filled: {
     backgroundColor: colors.primary,
@@ -61,7 +65,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    fontFamily: fonts.bold,
+    fontFamily: fonts.medium,
+    fontSize: wp('3.5%'),
+
   },
   textFilled: {
     color: '#0A1F29',

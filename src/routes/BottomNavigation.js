@@ -8,7 +8,7 @@ import HomeIcon from '../assets/icons/HomeIcon';
 import ExploreIcon from '../assets/icons/ExploreIcon';
 import ChatIcon from '../assets/icons/ChatIcon';
 import ProfileIcon from '../assets/icons/ProfileIcon';
-import CustomTabBar from '../components/CustomTabBar'; // 👈 new import
+import CustomTabBar from '../components/CustomTabBar';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +18,7 @@ const BottomTabs = () => {
       screenOptions={{
         headerShown: false,
       }}
-      tabBar={(props) => <CustomTabBar {...props} />} // 👈 inject custom bar
+      tabBar={(props) => <CustomTabBar {...props} />} 
     >
       <Tab.Screen
         name="Home"

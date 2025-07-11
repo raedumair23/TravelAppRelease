@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CustomText from './CustomText';
 import { colors } from '../constants/theme';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ImageBanner = ({ image, title, rating, onBackPress }) => (
   <View style={styles.container}>
@@ -11,12 +12,12 @@ const ImageBanner = ({ image, title, rating, onBackPress }) => (
 
     {/* Back Button */}
     <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
-      <Ionicons name="chevron-back" size={20} color="#fff" />
+      <Ionicons name="chevron-back" size={wp('5%')} color="#fff" />
     </TouchableOpacity>
 
     {/* Title + Rating */}
     <View style={styles.titleContainer}>
-      <CustomText bold style={styles.title}>{title}</CustomText>
+      <CustomText medium style={styles.title}>{title}</CustomText>
       <CustomText style={styles.rating}>⭐ {rating}</CustomText>
     </View>
   </View>
@@ -30,55 +31,56 @@ container: {
   width: 420,
 top:-12
 },
-
   image: {
-    width:'100%',
-    height: 361,
-    borderTopLeftRadius:30,
-    borderTopRightRadius:30,
-    borderBottomLeftRadius:50,
-    borderBottomRightRadius:50,
-
-    resizeMode:'stretch'
-    
+    width: '100%',
+    height: hp('45%'),
+    borderTopLeftRadius: wp('7%'),
+    borderTopRightRadius: wp('7%'),
+    borderBottomLeftRadius: wp('12%'),
+    borderBottomRightRadius: wp('12%'),
   },
-  overlay: { 
-    backgroundColor:colors.bgcolor,
-    borderTopLeftRadius:30,
-    borderTopRightRadius:30,
-    borderBottomLeftRadius:50,
-    borderBottomRightRadius:50,
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: hp('45%'),
+    width: '100%',
+    backgroundColor: colors.bgcolor,
+    borderTopLeftRadius: wp('7%'),
+    borderTopRightRadius: wp('7%'),
+    borderBottomLeftRadius: wp('12%'),
+    borderBottomRightRadius: wp('12%'),
   },
   backButton: {
     position: 'absolute',
-    top: 50,
-    left: '8.4%',
+    top: hp('6%'),
+    left: wp('7%'),
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-    height: 44,
-    width: 44,
+    paddingVertical: hp('1.2%'),
+    paddingHorizontal: wp('3.5%'),
+    borderRadius: wp('3%'),
+    height: hp('5.5%'),
+    width: hp('5.5%'),
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 2,
   },
   titleContainer: {
     position: 'absolute',
-    bottom: 15,
-    left: 40,
-    right: 40,
+    bottom: hp('2%'),
+    left: wp('8%'),
+    right: wp('8%'),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   title: {
-    color:colors.textLight,
-    fontSize: 22,
+    color: colors.textLight,
+    fontSize: wp('4.5%'),
   },
   rating: {
-    color:colors.rating,
-    fontSize: 14,
+    color: colors.rating,
+    fontSize: wp('3.5%'),
   },
 });
 
